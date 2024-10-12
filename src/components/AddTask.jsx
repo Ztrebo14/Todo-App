@@ -3,26 +3,35 @@ import { useTask } from '../context/TaskProvider'
 
 
 const AddTask = () => {
-    const { setTasks } = useTask()
-    const [ taskName, setTaskName ] = useState("")
+    const { setTasks, task, setTask } = useTask()
 
     const handleInputTaskName = (e) => {
-        setTaskName(e.target.value)
+        const { value } = e.target
+        setTask(prevTask => ({...prevTask, taskName: value}))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setTasks(prevTask => [...prevTask, taskName])
-        setTaskName('')
+        setTasks(prevTask => [...prevTask, task])
+        setTask({ taskName: '', isDone: false})
     }
 
   return (
     <>
         <form onSubmit={handleSubmit}>
-            <input type="text" name='taskName' id='taskName' onChange={handleInputTaskName} />
-            <button type="submit" className='bg-slate-200 rounded-md mx-2 p-1'>Add Task</button>
+            <input 
+                type="text" 
+                name='taskName' 
+                id='taskName' 
+                value={task.taskName} 
+                onChange={handleInputTaskName} 
+                className='py-1 pl-2 rounded-l-md'
+            />
+            <button 
+                type="submit" 
+                className='bg-slate-200 rounded-r-md mx-2 p-1'
+            >Add Task</button>
         </form>
-        <p>{taskName}</p>
     </>
   )
 }

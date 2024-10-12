@@ -8,10 +8,14 @@ export const useTask = () => {
 
 const TaskProvider = ({children}) => {
     const [tasks, setTasks] = useState([])
-    console.log(tasks)
+    const [task, setTask] = useState({
+      taskName: '',
+      isDone: false
+    })
+
   return (
     <>
-        <TaskContext.Provider value={{ tasks, setTasks }} >
+        <TaskContext.Provider value={{ tasks, setTasks, task, setTask }} >
         {children}
         </TaskContext.Provider>
     </>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import AddTask from '../components/AddTask'
 import { useTask } from '../context/TaskProvider'
@@ -6,6 +6,7 @@ import ListItem from '../components/ListItem'
 
 const Dashboard = () => {
     const { tasks } = useTask()
+    console.log(tasks)
   return (
     <>
         <div className='min-h-screen bg-cyan-500 text-center'>
@@ -15,7 +16,7 @@ const Dashboard = () => {
             <AddTask />
             {tasks.map((task, index) => (
                 <ul key={index}>
-                    <ListItem task={task} />
+                    <ListItem id={index} taskName={task.taskName} isDone={task.isDone} />
                 </ul>
             ))}
         </div>
